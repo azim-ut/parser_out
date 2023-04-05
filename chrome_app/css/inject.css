@@ -1,0 +1,11 @@
+.od{
+    background: red !important;
+}
+
+img{
+    display: none !important;
+}
+
+video {
+    display: none !important;
+}
