@@ -1,5 +1,5 @@
 #!/bin/bash
 
-taskkill -f -im parser
-taskkill -f -im agents
+taskkill -im parser
+taskkill -im agents
 #ssh-agent -k
