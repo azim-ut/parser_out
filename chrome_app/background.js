@@ -102,7 +102,7 @@ chrome.tabs.onUpdated.addListener((tabId, state, tab) => {
 							}
 							let domHtml = document.getElementById('root').innerHTML;
 							let data = {url: url, id: linkId, html: decodeHTMLEntities(domHtml)};
-							httpPostAsync("http://localhost:8100/parser/api/agents/leroy/content/html", JSON.stringify(data), markAsParsed)
+							httpPostAsync("https://proftrud.ru/parser/api/agents/leroy/content/html", JSON.stringify(data), markAsParsed)
 						}
 
 						function httpPostAsync(theUrl, data, callback)
@@ -182,7 +182,7 @@ function fetchLinks(){
 			if(agentName === "" || !agentName){
 				agentName = tab.id;
 			}
-			let endPoint = "http://localhost:8100/parser/api/agents/leroy/links/list/" + agentName + "/" + LINKS_LIMIT;
+			let endPoint = "https://proftrud.ru/parser/api/agents/leroy/links/list/" + agentName + "/" + LINKS_LIMIT;
 			endpointCall(endPoint, (response) => {
 				let incomeList = JSON.parse(response);
 				if (incomeList.length > 0) {
