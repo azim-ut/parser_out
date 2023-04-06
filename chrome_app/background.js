@@ -166,8 +166,8 @@ const MINUTES_5 = 1000 * 60 * 5;
 const MINUTES_2 = 1000 * 60 * 2;
 
 // setInterval(() => { loadProductTab() }, 10000);
-setInterval(() => { fetchLinks() }, 1000);
-setInterval(() => { fetchName() }, 2000);
+setInterval(() => { fetchLinks() }, 3000);
+setInterval(() => { fetchName() }, 5000);
 setInterval(() => { checkTab() }, 30000);
 checkTab();
 fetchName();
