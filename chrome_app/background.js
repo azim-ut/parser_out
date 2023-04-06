@@ -193,7 +193,9 @@ function fetchLinks(){
 			if(tab.title === "DONE" && linksToParse.length > 0){
 				const link = linksToParse.pop();
 				CURRENT_LINK_ID = link.id;
-
+				if(!link.path || link.path === "null"){
+					return;
+				}
 				chrome.tabs.update(tab.id, {url: "https://" + link.domain + link.path}).then((a, b) => {
 
 				})
