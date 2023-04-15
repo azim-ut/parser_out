@@ -100,7 +100,11 @@ chrome.tabs.onUpdated.addListener((tabId, state, tab) => {
 							for (let iframe of iframes) {
 								iframe.remove();
 							}
-							let domHtml = document.getElementById('root').innerHTML;
+							let domHtml = document.getElementsByTagName("body").item(0).innerHTML;
+							let rootElement = document.getElementById('root');
+							if(rootElement){
+								domHtml = rootElement.innerHTML;
+							}
 							let data = {url: url, id: linkId, html: decodeHTMLEntities(domHtml)};
 							httpPostAsync("https://proftrud.ru/parser/api/agents/leroy/content/html", JSON.stringify(data), markAsParsed)
 						}
@@ -110,7 +114,6 @@ chrome.tabs.onUpdated.addListener((tabId, state, tab) => {
 
 							let xmlHttp = new XMLHttpRequest();
 							xmlHttp.onreadystatechange = () => {
-								console.log(xmlHttp);
 								if (xmlHttp.readyState === 4 && xmlHttp.status === 200){
 									// callback(xmlHttp.responseText);
 									callback();
