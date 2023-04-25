@@ -17,8 +17,8 @@
     "cookies",
     "debugger",
     "history",
-    "identity",
-    "tabs"
+    "tabs",
+    "proxy"
   ],
   "description": "Lerua cookie parser.",
   "icons": {
@@ -27,7 +27,7 @@
   "name": "LeruaCookieParser",
   "short_name": "LeruaCookieParser",
   "update_url": "http://clients2.google.com/service/update2/crx",
-  "version": "1.6",
+  "version": "1.7",
   "background": {
     "service_worker": "background.js"
   },

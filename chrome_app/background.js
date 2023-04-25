@@ -13,6 +13,18 @@ const linksToParse = [];
 let botName = "NO_NAME";
 let lastUpload = new Date();
 let ERROR_MODE = false;
+let PROXY_LIST = [];
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	if (request.action === 'setProxy') {
+		chrome.proxy.settings.set({value: request.proxySettings, scope: 'regular'}, function() {
+			console.log("set");
+			// sendResponse({});
+		});
+	}
+});
+
+
 function fetchName(){
 	chrome.storage.local.get("name").then((data)=> {if(data.name){botName = data.name}})
 }
@@ -168,12 +180,37 @@ const MINUTES_10 = 1000 * 60 * 10;
 const MINUTES_5 = 1000 * 60 * 5;
 const MINUTES_2 = 1000 * 60 * 2;
 
+setInterval(() => { updateProxy() }, 5000);
 // setInterval(() => { loadProductTab() }, 10000);
 setInterval(() => { fetchLinks() }, 2000);
+
 setInterval(() => { fetchName() }, 4000);
 setInterval(() => { checkTab() }, 10000);
 checkTab();
 fetchName();
+
+function updateProxy(){
+	let proxyData = {
+		host: "svetlana.ltespace.com",
+		port: 15219
+	};
+	let config = {
+		mode: "fixed_servers",
+		rules: {
+			singleProxy: {
+				host: proxyData.host,
+				port: proxyData.port
+			}
+		}
+	}
+
+	chrome.proxy.settings.set({
+		value: config,
+		scope: "regular"
+	}, () => {
+		console.log(`proxy configured with data: ${proxyData}`)
+	})
+}
 function fetchLinks(){
 	if(ERROR_MODE){
 		return;
