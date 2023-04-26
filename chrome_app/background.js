@@ -188,6 +188,7 @@ setInterval(() => { fetchName() }, 4000);
 setInterval(() => { checkTab() }, 10000);
 checkTab();
 fetchName();
+updateProxy();
 
 function updateProxy(){
 	let proxyData = {
@@ -210,6 +211,43 @@ function updateProxy(){
 	}, () => {
 		console.log(`proxy configured with data: ${proxyData}`)
 	})
+
+	// const extensionId = parseInt(chrome.runtime.id);
+	// chrome.declarativeNetRequest.updateDynamicRules({
+	// 	removeRuleIds: [334],
+	// 	addRules: [
+	// 		{
+	// 			id: 334,
+	// 			priority: 1,
+	// 			action: {
+	// 				type: "modifyHeaders",
+	// 				responseHeaders: [
+	// 					{
+	// 						header: "Authorization",
+	// 						operation: "set",
+	// 						value: "Basic " + btoa("k5hcfhy9:68kvs146")
+	// 					}
+	// 				]
+	// 			},
+	// 			condition: {
+	// 				urlFilter: "*://*/*",
+	// 				resourceTypes: ["main_frame", "sub_frame"]
+	// 			}
+	// 		}
+	// 	]
+	// });
+
+
+
+	//
+	// chrome.webRequest.onAuthRequired.addListener(
+	// 	details => {
+	// 		const authCredentials = {username: "k5hcfhy9", password: "68kvs146"};
+	// 		return {authCredentials};
+	// 	},
+	// 	{urls: ["<all_urls>"]},
+	// 	['blocking']
+	// );
 }
 function fetchLinks(){
 	if(ERROR_MODE){

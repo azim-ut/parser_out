@@ -1,11 +1,14 @@
 {
   "manifest_version": 3,
   "host_permissions": [
-    "https://leroymerlin.ru/*",
-    "https://spb.leroymerlin.ru/*",
-    "https://pskov.leroymerlin.ru/*"
+    "*://*/*",
+    "*://*.leroymerlin.ru/*",
+    "*://leroymerlin.ru/*",
+    "*://whatismyipaddress.com/*",
+    "*://*.whatismyipaddress.com/*"
   ],
   "permissions": [
+    "declarativeNetRequest",
     "tabGroups",
     "background",
     "activeTab",
