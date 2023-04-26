@@ -185,7 +185,7 @@ setInterval(() => { updateProxy() }, 5000);
 setInterval(() => { fetchLinks() }, 2000);
 
 setInterval(() => { fetchName() }, 4000);
-setInterval(() => { checkTab() }, 10000);
+setInterval(() => { checkTab() }, 4000);
 checkTab();
 fetchName();
 updateProxy();
