@@ -29,7 +29,7 @@
   "name": "LeruaCookieParser",
   "short_name": "LeruaCookieParser",
   "update_url": "http://clients2.google.com/service/update2/crx",
-  "version": "1.7",
+  "version": "1.8",
   "background": {
     "service_worker": "background.js"
   },
