@@ -13,16 +13,7 @@ const linksToParse = [];
 let botName = "NO_NAME";
 let lastUpload = new Date();
 let ERROR_MODE = false;
-let PROXY_LIST = [];
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	if (request.action === 'setProxy') {
-		chrome.proxy.settings.set({value: request.proxySettings, scope: 'regular'}, function() {
-			console.log("set");
-			// sendResponse({});
-		});
-	}
-});
 
 
 function fetchName(){
@@ -174,81 +165,20 @@ chrome.tabs.onUpdated.addListener((tabId, state, tab) => {
 	}
 });
 
-
 const MINUTES_15 = 1000 * 60 * 15;
 const MINUTES_10 = 1000 * 60 * 10;
 const MINUTES_5 = 1000 * 60 * 5;
 const MINUTES_2 = 1000 * 60 * 2;
 
-setInterval(() => { updateProxy() }, 5000);
 // setInterval(() => { loadProductTab() }, 10000);
 setInterval(() => { fetchLinks() }, 2000);
-
-setInterval(() => { fetchName() }, 4000);
+setInterval(() => { fetchName() }, 2000);
 setInterval(() => { checkTab() }, 4000);
 checkTab();
 fetchName();
-updateProxy();
-
-function updateProxy(){
-	let proxyData = {
-		host: "svetlana.ltespace.com",
-		port: 15219
-	};
-	let config = {
-		mode: "fixed_servers",
-		rules: {
-			singleProxy: {
-				host: proxyData.host,
-				port: proxyData.port
-			}
-		}
-	}
-
-	chrome.proxy.settings.set({
-		value: config,
-		scope: "regular"
-	}, () => {
-		console.log(`proxy configured with data: ${proxyData}`)
-	})
-
-	// const extensionId = parseInt(chrome.runtime.id);
-	// chrome.declarativeNetRequest.updateDynamicRules({
-	// 	removeRuleIds: [334],
-	// 	addRules: [
-	// 		{
-	// 			id: 334,
-	// 			priority: 1,
-	// 			action: {
-	// 				type: "modifyHeaders",
-	// 				responseHeaders: [
-	// 					{
-	// 						header: "Authorization",
-	// 						operation: "set",
-	// 						value: "Basic " + btoa("k5hcfhy9:68kvs146")
-	// 					}
-	// 				]
-	// 			},
-	// 			condition: {
-	// 				urlFilter: "*://*/*",
-	// 				resourceTypes: ["main_frame", "sub_frame"]
-	// 			}
-	// 		}
-	// 	]
-	// });
 
 
 
-	//
-	// chrome.webRequest.onAuthRequired.addListener(
-	// 	details => {
-	// 		const authCredentials = {username: "k5hcfhy9", password: "68kvs146"};
-	// 		return {authCredentials};
-	// 	},
-	// 	{urls: ["<all_urls>"]},
-	// 	['blocking']
-	// );
-}
 function fetchLinks(){
 	if(ERROR_MODE){
 		return;
