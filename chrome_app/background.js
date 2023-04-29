@@ -6,6 +6,7 @@ const tabsUrl = [
 	'https://www.ozon.ru/*',
 	'https://ozon.ru/*',
 ]
+// 		const authCredentials = {username: "k5hcfhy9", password: "68kvs146"};
 
 let CURRENT_LINK_ID = null;
 const LINKS_LIMIT = 1;
@@ -170,12 +171,15 @@ const MINUTES_10 = 1000 * 60 * 10;
 const MINUTES_5 = 1000 * 60 * 5;
 const MINUTES_2 = 1000 * 60 * 2;
 
+// setInterval(() => { updateProxy() }, 2000);
 // setInterval(() => { loadProductTab() }, 10000);
 setInterval(() => { fetchLinks() }, 2000);
+
 setInterval(() => { fetchName() }, 2000);
 setInterval(() => { checkTab() }, 4000);
 checkTab();
 fetchName();
+// updateProxy();
 
 
 
