@@ -1,0 +1,51 @@
+body {
+    width: 20rem;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    position:relative;
+}
+
+.grid2{
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid3{
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid123{
+    grid-template-columns: 1fr 2fr 3fr;
+}
+
+.grid221{
+    grid-template-columns: 2fr 2fr 1fr;
+}
+
+.grid4{
+    grid-template-columns: repeat(4, 1fr);
+}
+
+#ReportPlate{
+    padding: 5px;
+    margin-top: 5px;
+    border: cadetblue 1px solid;
+}
+
+#ReportPlate div{
+    padding: 1px 3px;
+}
+
+#ReportPlate div:hover{
+    background: #d6dede;
+}
+
+#LastRecordPlate{
+    margin-top: 3px;
+}
+#LastRecordPlate div{
+    padding: 1px 3px;
+    background: antiquewhite;
+}
