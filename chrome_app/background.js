@@ -32,6 +32,7 @@ function checkTab(){
 }
 
 chrome.tabs.onUpdated.addListener((tabId, state, tab) => {
+	console.log("STATE_STATUS: ", state.status);
 	if(state.status === 'complete'){
 		chrome.tabs.query({url: tabsUrl}).then(tabs => {
 			if(tabs.length > 0){
@@ -195,7 +196,7 @@ function fetchLinks(){
 				}
 			})
 
-			if(tab.title === "DONE" && linksToParse.length > 0){
+			if(linksToParse.length > 0){
 				const link = linksToParse.pop();
 				CURRENT_LINK_ID = link.id;
 				if(!link.path || link.path === "null"){
