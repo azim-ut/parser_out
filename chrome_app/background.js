@@ -16,20 +16,28 @@ let lastUpload = new Date();
 let ERROR_MODE = false;
 
 
-
-function fetchName(){
-	chrome.storage.local.get("name").then((data)=> {if(data.name){botName = data.name}})
-}
 function checkTab(){
+	let now   = new Date();
+	let sinceLastParse = (now.getTime() - lastUpload.getTime()) / 1000;
 	ERROR_MODE = false;
 
 	console.log("CHECK ERROR MODE: ", ERROR_MODE);
 	chrome.tabs.query({url: tabsUrl}).then(tabs => {
 		if (tabs.length === 0) {
 			chrome.tabs.create({ url: "https://leroymerlin.ru", index: 0 });
+		}else if(sinceLastParse > 30){
+			const tab = tabs[0];
+			chrome.tabs.update(tab.id, {url: "https://leroymerlin.ru"}).then((a, b) => {
+
+			});
 		}
 	});
 }
+
+function fetchName(){
+	chrome.storage.local.get("name").then((data)=> {if(data.name){botName = data.name}})
+}
+
 
 chrome.tabs.onUpdated.addListener((tabId, state, tab) => {
 	console.log("STATE_STATUS: ", state.status);
