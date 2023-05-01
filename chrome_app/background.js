@@ -231,20 +231,18 @@ function fetchLinks(){
 			endpointCall(endPoint, (response) => {
 				let incomeList = JSON.parse(response);
 				if (incomeList.length > 0) {
-					incomeList.forEach(link => linksToParse.push(link));
+					incomeList.forEach(link => {
+						console.log(link);
+						CURRENT_LINK_ID = link.id;
+						if(!link.path || link.path === "null"){
+							return;
+						}
+						chrome.tabs.update(tab.id, {url: "https://" + link.domain + link.path}).then((a, b) => {
+
+						})
+					});
 				}
 			})
-
-			if(linksToParse.length > 0){
-				const link = linksToParse.pop();
-				CURRENT_LINK_ID = link.id;
-				if(!link.path || link.path === "null"){
-					return;
-				}
-				chrome.tabs.update(tab.id, {url: "https://" + link.domain + link.path}).then((a, b) => {
-
-				})
-			}
 		}
 	});
 }
