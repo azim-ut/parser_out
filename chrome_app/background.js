@@ -173,9 +173,40 @@ setInterval(() => { fetchName() }, 2000);
 setInterval(() => { checkTab() }, 4000);
 checkTab();
 fetchName();
-// updateProxy();
 
 
+function setPAC(data) {
+	data.text().then(data => {
+		var config = {
+			mode: "pac_script",
+			pacScript: {
+
+				data: data
+			}
+		};
+		chrome.proxy.settings.set({value: config, scope: 'regular'}, () => {});
+	});
+}
+
+function loadPACfile() {
+	let self = this;
+	let address = chrome.runtime.getURL("proxy.pac");
+
+	fetch(address, {
+		method: 'get',
+		headers: {
+			"Content-type": "text/html; charset=UTF-8"
+		}
+	})
+		.then(response => {
+			setPAC(response);
+		})
+		.catch(function (error) {
+			console.log('Request failed', error);
+		});
+}
+
+loadPACfile();
 
 function fetchLinks(){
 	if(ERROR_MODE){

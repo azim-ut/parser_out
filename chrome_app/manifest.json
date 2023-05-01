@@ -18,9 +18,16 @@
     "activeTab",
     "storage",
     "cookies",
+    "proxy",
     "debugger",
     "history",
     "tabs"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["proxy.pac"],
+      "matches": ["<all_urls>"]
+    }
   ],
   "description": "Lerua cookie parser.",
   "icons": {
