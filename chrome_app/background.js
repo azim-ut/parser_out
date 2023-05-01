@@ -26,10 +26,10 @@ function checkTab(){
 		if (tabs.length === 0) {
 			chrome.tabs.create({ url: "https://leroymerlin.ru", index: 0 });
 		}else if(sinceLastParse > 30){
-			const tab = tabs[0];
-			chrome.tabs.update(tab.id, {url: "https://leroymerlin.ru"}).then((a, b) => {
-
-			});
+			// const tab = tabs[0];
+			// chrome.tabs.update(tab.id, {url: "https://leroymerlin.ru"}).then((a, b) => {
+			//
+			// });
 		}
 	});
 }
