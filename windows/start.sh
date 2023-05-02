@@ -1,3 +1,3 @@
 #!/bin/bash
 
-java -jar parser-1.jar -Dfile. encoding=UTF-8
+java -jar parser-1.jar -Dfile.encoding=UTF-8
