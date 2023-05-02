@@ -1,3 +1,4 @@
 #!/bin/bash
 
-java -jar parser-1.jar -Dfile.encoding=UTF-8
+chcp 65001
+java -Dfile.encoding=UTF-8 -jar parser-1.jar
