@@ -232,11 +232,15 @@ function fetchLinks(){
 				let incomeList = JSON.parse(response);
 				if (incomeList.length > 0) {
 					incomeList.forEach(link => {
-						console.log(link);
 						CURRENT_LINK_ID = link.id;
 						if(!link.path || link.path === "null"){
 							return;
 						}
+						chrome.cookies.getAll({domain: link.domain}, function(cookies) {
+							for(var i=0; i<cookies.length;i++) {
+								chrome.cookies.remove({url: "https://" + cookies[i].domain  + cookies[i].path, name: cookies[i].name});
+							}
+						});
 						chrome.tabs.update(tab.id, {url: "https://" + link.domain + link.path}).then((a, b) => {
 
 						})
