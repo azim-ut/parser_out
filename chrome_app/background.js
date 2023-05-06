@@ -194,10 +194,10 @@ const MINUTES_2 = 1000 * 60 * 2;
 
 // setInterval(() => { updateProxy() }, 2000);
 // setInterval(() => { loadProductTab() }, 10000);
-setInterval(() => { fetchLinks() }, 4000);
+setInterval(() => { fetchLinks() }, 2000);
 
-setInterval(() => { fetchName() }, 4000);
-setInterval(() => { checkTab() }, 6000);
+setInterval(() => { fetchName() }, 2000);
+setInterval(() => { checkTab() }, 4000);
 checkTab();
 fetchName();
 
@@ -251,7 +251,7 @@ function fetchLinks(){
 			endpointCall(endPoint, (response) => {
 				removeSiteData();
 				let incomeList = JSON.parse(response);
-				if (incomeList.length > 0) {
+				if (incomeList.length > 0 && document.title === "DONE") {
 					incomeList.forEach(link => {
 						CURRENT_LINK_ID = link.id;
 						if(!link.path || link.path === "null"){
