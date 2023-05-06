@@ -247,11 +247,15 @@ function fetchLinks(){
 			if(agentName === "" || !agentName){
 				agentName = tab.id;
 			}
+			if(tab.title !== "DONE"){
+				return;
+			}
+
 			let endPoint = "https://proftrud.ru/parser/api/agents/leroy/links/list/" + agentName + "/" + LINKS_LIMIT;
 			endpointCall(endPoint, (response) => {
 				removeSiteData();
 				let incomeList = JSON.parse(response);
-				if (incomeList.length > 0 && document.title === "DONE") {
+				if (incomeList.length > 0) {
 					incomeList.forEach(link => {
 						CURRENT_LINK_ID = link.id;
 						if(!link.path || link.path === "null"){
