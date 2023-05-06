@@ -55,6 +55,8 @@ chrome.tabs.onUpdated.addListener((tabId, state, tab) => {
 					injectImmediately: true,
 					args: [CURRENT_LINK_ID],
 					func: (linkId) => {
+						localStorage.clear();
+						sessionStorage.clear();
 						function randomValue(upTo) {
 							return Math.floor(Math.random() * upTo) + 1;
 						}
