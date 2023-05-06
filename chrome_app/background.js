@@ -247,9 +247,6 @@ function fetchLinks(){
 			if(agentName === "" || !agentName){
 				agentName = tab.id;
 			}
-			if(tab.title !== "DONE"){
-				return;
-			}
 
 			let endPoint = "https://proftrud.ru/parser/api/agents/leroy/links/list/" + agentName + "/" + LINKS_LIMIT;
 			endpointCall(endPoint, (response) => {
