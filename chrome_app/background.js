@@ -6,6 +6,13 @@ const tabsUrl = [
 	'https://www.ozon.ru/*',
 	'https://ozon.ru/*',
 ]
+
+const origins = [
+	'https://*.leroymerlin.ru',
+	'https://leroymerlin.ru',
+	'https://spb.leroymerlin.ru',
+	'https://pskov.leroymerlin.ru'
+]
 // 		const authCredentials = {username: "k5hcfhy9", password: "68kvs146"};
 
 let CURRENT_LINK_ID = null;
@@ -14,6 +21,16 @@ const linksToParse = [];
 let botName = "NO_NAME";
 let lastUpload = new Date();
 let ERROR_MODE = false;
+let siteRemoveSettings = {
+	cookies: !0,
+	cache: !0,
+	cacheStorage: !0,
+	fileSystems: !0,
+	indexedDB: !0,
+	localStorage: !0,
+	serviceWorkers: !0,
+	webSQL: !0
+}
 
 
 function checkTab(){
@@ -224,6 +241,7 @@ function fetchLinks(){
 	}
 	chrome.tabs.query({url: tabsUrl}).then(tabs => {
 		if(tabs.length>0) {
+
 			const tab = tabs[0];
 			let agentName = botName;
 			if(agentName === "" || !agentName){
@@ -231,6 +249,7 @@ function fetchLinks(){
 			}
 			let endPoint = "https://proftrud.ru/parser/api/agents/leroy/links/list/" + agentName + "/" + LINKS_LIMIT;
 			endpointCall(endPoint, (response) => {
+				removeSiteData();
 				let incomeList = JSON.parse(response);
 				if (incomeList.length > 0) {
 					incomeList.forEach(link => {
@@ -238,11 +257,6 @@ function fetchLinks(){
 						if(!link.path || link.path === "null"){
 							return;
 						}
-						chrome.cookies.getAll({domain: link.domain}, function(cookies) {
-							for(var i=0; i<cookies.length;i++) {
-								chrome.cookies.remove({url: "https://" + cookies[i].domain  + cookies[i].path, name: cookies[i].name});
-							}
-						});
 						chrome.tabs.update(tab.id, {url: "https://" + link.domain + link.path}).then((a, b) => {
 
 						})
@@ -253,6 +267,13 @@ function fetchLinks(){
 	});
 }
 
+function removeSiteData() {
+	chrome.storage.local.set({siteRemoveSettings});
+	chrome.browsingData.remove({
+		originTypes: {unprotectedWeb: !0, protectedWeb: !0},
+		origins: origins
+	}, siteRemoveSettings, ()=>{});
+}
 function endpointCall(endPoint, callback){
 	fetch(endPoint)
 		.then(response => response.text())

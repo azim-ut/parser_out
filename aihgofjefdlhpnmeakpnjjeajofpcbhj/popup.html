@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="color-scheme" content="light dark">
+  <title>Options</title>
+  <style type="text/css">
+    html {
+      font-size: 16px;
+    }
+    body {
+      width: 300px;
+      padding: 10px;
+      font-size: 14px;
+    }
+    ul {
+      margin: 0px;
+    }
+    input, button {
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+    }
+    input[type="url"] {
+      width: 234px;
+    }
+    .check-group {
+      padding-left: 20px;
+    }
+    .clear-button {
+      cursor: pointer;
+      line-height: 2em;
+      font-weight: bold;
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+      margin-right: 5px;
+    }
+    .warn {
+      background-color: #dc3545;
+      border-color: #dc3545;
+      color: #fff;
+    }
+    .error {
+      color:  #dc3545;
+    }
+    .status {
+      margin-left: 5px;
+      margin-right: 3px;
+    }
+    .mb-2 {
+      margin-bottom: 10px;
+    }
+    .origin-item {
+      margin-top: 3px;
+      margin-bottom: 3px;
+    }
+    .bold {
+      font-weight: bold;
+    }
+    .center {
+      text-align: center;
+    }
+    .display-none {
+      display: none;
+    }
+    .icon {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      vertical-align: text-bottom;
+    }
+    #origin-no:checked + label {
+      font-size: 18px;
+      font-weight: bold;
+      color: #dc3545;
+    }
+    .action-panel {
+      display: flex;
+      align-items: center;
+    }
+    .deleting {
+      animation: spin 2.5s linear infinite;
+      width: 20px;
+      height: 20px;
+    }
+    @keyframes spin { 100% { transform:rotate(360deg); } }
+    @media (prefers-color-scheme: dark) {
+      img {
+        filter: invert(90%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h3></h3>
+  <div id='storage-usage'></div>
+  <div class="mb-2" id='storage-details'></div>
+  <div class="mb-2 action-panel">
+    <button id='siteRemoveBtn' class="clear-button">Clear Site Data</button>
+    <img src="img/gear.svg" class="deleting display-none">
+    <span id='remove-status' class="status"></span>
+    <span id='dotdotdot'></span>
+  </div>
+  <div class="error"></div>
+
+  <fieldset>
+    <legend>Removal Options</legend>
+
+    <div>
+      <input type="radio" id="origin-yes" name="origin" value="none" checked>
+      <label for="origin-yes">Current Site</label>
+    </div>
+    <div class="mb-2">
+      <input type="radio" id="origin-no" name="origin" value="allSite">
+      <label for="origin-no">All Web Sites</label>
+    </div>
+
+    <div class="mb-2 display-none" id="exclude-container">
+      <div>Exclude Origins <a href="https://developer.mozilla.org/docs/Web/HTTP/Headers/Origin" target="_blank"><img src="img/launch.svg" class="icon"></a></div>
+      <div id="exclude-list"></div>
+      <div><img src="img/add.svg" class="icon" id="add-exclude"></div>
+    </div>
+
+    <div class="mb-2">
+      <div>
+        <input type="checkbox" id="all-cache">
+        <label for="all-cache">Cache</label>
+      </div>
+      <div class="check-group">
+        <div>
+          <input type="checkbox" id="clear-cache">
+          <label for="clear-cache">Browser Cache</label>
+        </div>
+        <div>
+          <input type="checkbox" id="clear-cacheStorage">
+          <label for="clear-cacheStorage">Cache Storage</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <div>
+        <input type="checkbox" id="all-storage">
+        <label for="all-storage">Storage</label>
+      </div>
+      <div class="check-group">
+        <div>
+          <input type="checkbox" id="clear-localStorage">
+          <label for="clear-localStorage">Local Storage</label>
+        </div>
+        <div>
+          <input type="checkbox" id="clear-indexedDB">
+          <label for="clear-indexedDB">IndexedDB</label>
+        </div>
+        <div>
+          <input type="checkbox" id="clear-webSQL">
+          <label for="clear-webSQL">Web SQL</label>
+        </div>
+        <div>
+          <input type="checkbox" id="clear-cookies">
+          <label for="clear-cookies">Cookies</label>
+        </div>
+        <div>
+          <input type="checkbox" id="clear-serviceWorkers">
+          <label for="clear-serviceWorkers">Service Workers</label>
+        </div>
+        <div>
+          <input type="checkbox" id="clear-fileSystems">
+          <label for="clear-fileSystems">File Systems</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="other-type" class="display-none">
+      <div>
+        <input type="checkbox" id="all-others">
+        <label for="all-others">Others</label>
+      </div>
+      <div class="check-group">
+        <div>
+          <input type="checkbox" id="clear-downloads">
+          <label for="clear-downloads">Download List</label>
+        </div>
+        <div>
+          <input type="checkbox" id="clear-history">
+          <label for="clear-history">Visited History</label>
+        </div>
+        <div>
+          <input type="checkbox" id="clear-formData">
+          <label for="clear-formData">Stored Form Data</label>
+        </div>
+        <div>
+          <input type="checkbox" id="clear-passwords">
+          <label for="clear-passwords">Stored Passwords</label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <template id="exclude-tp">
+    <div class="origin-item">
+      <input type="url" placeholder="https://www.example.com" maxlength="500">
+      <img src="img/remove.svg" class="icon">
+    </div>
+  </template>
+  <script type="text/javascript" src="js/filesize.min.js"></script>
+  <script type="text/javascript" src="popup.js"></script>
+</body>
+</html>
