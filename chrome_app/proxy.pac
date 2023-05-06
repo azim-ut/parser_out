@@ -10,7 +10,7 @@ function FindProxyForURL(url, host){
 	    dnsDomainIs(host, '*.leroymerlin.ru') ||
 	    dnsDomainIs(host, 'leroymerlin.ru') ||
 	    dnsDomainIs(host, '*.leroymerlin.ru')){
-            return 'PROXY ' + proxy + '; PROXY ' + proxy + ' ' + credentials + '; DIRECT';
+            return 'PROXY ' + proxy + ' ' + credentials + '; DIRECT';
 	    }
 	return 'DIRECT';
 }
