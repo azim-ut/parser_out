@@ -194,10 +194,10 @@ const MINUTES_2 = 1000 * 60 * 2;
 
 // setInterval(() => { updateProxy() }, 2000);
 // setInterval(() => { loadProductTab() }, 10000);
-setInterval(() => { fetchLinks() }, 4000);
+setInterval(() => { fetchLinks() }, 3000);
 
 setInterval(() => { fetchName() }, 3000);
-setInterval(() => { checkTab() }, 6000);
+setInterval(() => { checkTab() }, 4000);
 checkTab();
 fetchName();
 
