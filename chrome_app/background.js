@@ -255,7 +255,7 @@ function fetchLinks(){
 				if (incomeList.length > 0) {
 					incomeList.forEach(link => {
 						CURRENT_LINK_ID = link.id;
-						if(!link.path || link.path === "null"){
+						if(!link.path || link.path === "null" || !link.domain || link.domain === "null"){
 							return;
 						}
 						chrome.tabs.update(tab.id, {url: "https://" + link.domain + link.path}).then((a, b) => {
