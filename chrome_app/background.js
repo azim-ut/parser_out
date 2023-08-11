@@ -132,8 +132,8 @@ chrome.tabs.onUpdated.addListener((tabId, state, tab) => {
 
 						function getMoreReview(){
 							let moreReviews = document.querySelectorAll('[data-qa="review-show-more_mf-pdp"]');
-							if(moreReviews){
-								moreReviews.click();
+							for(let btn of moreReviews){
+								btn.click();
 							}
 							if(reviewCnt){
 								readyToUpload = true;
