@@ -74,6 +74,7 @@ chrome.tabs.onUpdated.addListener((tabId, state, tab) => {
 					func: (linkId) => {
 						localStorage.clear();
 						sessionStorage.clear();
+						let readyToUpload = false;
 						function randomValue(upTo) {
 							return Math.floor(Math.random() * upTo) + 1;
 						}
@@ -94,6 +95,9 @@ chrome.tabs.onUpdated.addListener((tabId, state, tab) => {
 							delay(2);
 							break;
 						}
+
+						console.log("CHECK REVIEW");
+						let reviewCnt = setTimeout(getMoreReview, 2000)
 
 						let linksToFollow = [];
 						let waitTime = randomValue(2);
@@ -118,7 +122,27 @@ chrome.tabs.onUpdated.addListener((tabId, state, tab) => {
 							window.scrollTo(0, yScroll);
 						}
 
-						GFG_Fun();
+
+						let intervalUpload = setInterval(() => {
+							if(readyToUpload){
+								GFG_Fun();
+								clearInterval(intervalUpload)
+							}
+						}, 1000)
+
+						function getMoreReview(){
+							let moreReviews = document.querySelectorAll('[data-qa="review-show-more_mf-pdp"]');
+							if(moreReviews){
+								moreReviews.click();
+							}
+							if(reviewCnt){
+								readyToUpload = true;
+								clearTimeout(reviewCnt)
+							}else{
+								reviewCnt = setTimeout(getMoreReview, 2000)
+							}
+						}
+
 						function GFG_Fun() {
 							let url = window.location.href;
 							let iframes = document.getElementsByTagName("iframe");
