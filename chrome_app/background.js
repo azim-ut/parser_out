@@ -5,10 +5,12 @@ const tabsUrl = [
 	'https://pskov.leroymerlin.ru/*',
 	'https://www.ozon.ru/*',
 	'https://ozon.ru/*',
+	'https://google.com/*',
 ]
 
 const origins = [
 	'https://*.leroymerlin.ru',
+	'https://google.com',
 	'https://leroymerlin.ru',
 	'https://spb.leroymerlin.ru',
 	'https://pskov.leroymerlin.ru'
